@@ -20,8 +20,6 @@
   --brand-blue-400: #b9d5ff;
 
   --brand-yellow-500: #fff4d2;
-
-  --radius: 1.5rem;
 }
 
 @theme inline {
@@ -34,13 +32,10 @@
   --color-secondary-foreground: var(--brand-white);
   --color-tertiary: var(--brand-yellow-500);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Customs */
+  --radius-5xl: 2.5rem;
 
-  /*additional colors  */
-  --color-gradient-primary: linear-gradient(
+  --color-brand-gradient-primary: linear-gradient(
     146.14deg,
     var(--brand-pink-400) 8.01%,
     var(--brand-pink-200) 56.57%,
@@ -65,4 +60,22 @@
   --color-brand-secondary-400: var(--brand-blue-400);
 
   --color-brand-tertiary-500: var(--brand-yellow-500);
+
+  --font-chillax: var(--font-chillax);
+  --font-jakarta-sans: var(--font-jakarta-sans);
+  --font-cherry-bomb: var(--font-cherry-bomb);
+
+  --shadow-brand-glass: 12px 12px 24px 0px #ff779738,
+    -12px -12px 24px 0px #ffffff38;
+}
+
+@layer base {
+  *,
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  button {
+    @apply hover:cursor-pointer;
+  }
 }
