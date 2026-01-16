@@ -1,26 +1,68 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors */
+  --brand-white-100: #ffffff;
+  --brand-white-200: #e7e7e7;
+
+  --brand-dark-500: #222222;
+  --brand-dark-400: #4f4f4f;
+  --brand-dark-300: #606060;
+  --brand-dark-200: #939393;
+
+  --brand-pink-500: #ff7797;
+  --brand-pink-400: #fe86a2;
+  --brand-pink-300: #ff9bb3;
+  --brand-pink-200: #fdb1c3;
+
+  --brand-blue-500: #97bdf5;
+  --brand-blue-400: #b9d5ff;
+
+  --brand-yellow-500: #fff4d2;
+
+  --radius: 1.5rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Following Shadcn */
+  --color-background: var(--brand-white-100);
+  --color-foreground: var(--brand-dark-500);
+  --color-primary: var(--brand-pink-500);
+  --color-primary-foreground: var(--brand-white);
+  --color-secondary: var(--brand-blue-500);
+  --color-secondary-foreground: var(--brand-white);
+  --color-tertiary: var(--brand-yellow-500);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /*additional colors  */
+  --color-gradient-primary: linear-gradient(
+    146.14deg,
+    var(--brand-pink-400) 8.01%,
+    var(--brand-pink-200) 56.57%,
+    var(--brand-pink-300) 74.39%,
+    var(--brand-pink-500) 100.68%
+  );
+
+  --color-brand-white-100: var(--brand-white-100);
+  --color-brand-white-200: var(--brand-white-200);
+
+  --color-brand-dark-500: var(--brand-dark-500);
+  --color-brand-dark-400: var(--brand-dark-400);
+  --color-brand-dark-300: var(--brand-dark-300);
+  --color-brand-dark-200: var(--brand-dark-200);
+
+  --color-brand-primary-500: var(--brand-pink-500);
+  --color-brand-primary-400: var(--brand-pink-400);
+  --color-brand-primary-300: var(--brand-pink-300);
+  --color-brand-primary-200: var(--brand-pink-200);
+
+  --color-brand-secondary-500: var(--brand-blue-500);
+  --color-brand-secondary-400: var(--brand-blue-400);
+
+  --color-brand-tertiary-500: var(--brand-yellow-500);
 }
