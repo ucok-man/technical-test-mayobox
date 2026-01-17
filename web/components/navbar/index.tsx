@@ -6,9 +6,9 @@ import ContentMobile from "./content-mobile";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full">
-      <MaxWidthWrapper>
-        <div className="relative flex w-full items-center gap-6 py-3 px-6 md:px-12 lg:px-12 rounded-b-5xl border border-brand-white-200 bg-brand-white-100/50 h-20 backdrop-blur-[100px] shadow-brand-glass font-chillax font-semibold tracking-tight">
+    <nav className="fixed top-0 left-0 w-full font-chillax font-semibold tracking-tight px-6 z-50">
+      <MaxWidthWrapper className="overflow-hidden rounded-b-5xl border border-brand-white-200 px-0 shadow-brand-glass">
+        <div className="relative flex w-full items-center gap-6 py-3 px-6 md:px-12 lg:px-12 bg-brand-white-100/50 h-20 backdrop-blur-[100px]">
           <div className="absolute left-1/2 -translate-x-1/2 max-[320px]:hidden">
             <Image
               src={"/logo-small.png"}

@@ -15,6 +15,8 @@
   --brand-pink-400: #fe86a2;
   --brand-pink-300: #ff9bb3;
   --brand-pink-200: #fdb1c3;
+  --brand-pink-100: #ffe1e8;
+  --brand-pink-50: #fff1f4;
 
   --brand-blue-500: #97bdf5;
   --brand-blue-400: #b9d5ff;
@@ -35,13 +37,25 @@
   /* Customs */
   --radius-5xl: 2.5rem;
 
-  --color-brand-gradient-primary: linear-gradient(
+  --background-image-brand-gradient-primary: linear-gradient(
     146.14deg,
     var(--brand-pink-400) 8.01%,
     var(--brand-pink-200) 56.57%,
     var(--brand-pink-300) 74.39%,
     var(--brand-pink-500) 100.68%
   );
+
+  --background-image-brand-gradient-secondary: linear-gradient(
+    146.14deg,
+    var(--brand-blue-500) 8.01%,
+    var(--brand-blue-400) 56.57%,
+    var(--brand-blue-400) 74.39%,
+    var(--brand-blue-500) 100.68%
+  );
+
+  --shadow-button-primary: inset 12px 12px 24px 0px #ffffff70,
+    inset -12px -12px 24px 0px #ff779738, 12px 12px 24px 0px #ff779738,
+    -12px -12px 24px 0px #ffffff38;
 
   --color-brand-white-100: var(--brand-white-100);
   --color-brand-white-200: var(--brand-white-200);
@@ -55,6 +69,8 @@
   --color-brand-primary-400: var(--brand-pink-400);
   --color-brand-primary-300: var(--brand-pink-300);
   --color-brand-primary-200: var(--brand-pink-200);
+  --color-brand-primary-100: var(--brand-pink-100);
+  --color-brand-primary-50: var(--brand-pink-50);
 
   --color-brand-secondary-500: var(--brand-blue-500);
   --color-brand-secondary-400: var(--brand-blue-400);
@@ -70,7 +86,6 @@
 }
 
 @layer base {
-  *,
   body {
     @apply bg-background text-foreground;
   }

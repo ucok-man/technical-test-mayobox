@@ -26,8 +26,6 @@ const cherryBombOne = localFont({
   weight: "400",
 });
 
-// CherryBombOne-Regular
-
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
