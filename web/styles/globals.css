@@ -5,6 +5,7 @@
   /* Colors */
   --brand-white-100: #ffffff;
   --brand-white-200: #e7e7e7;
+  --brand-white-300: #e4e4e4;
 
   --brand-dark-500: #222222;
   --brand-dark-400: #4f4f4f;
@@ -59,6 +60,7 @@
 
   --color-brand-white-100: var(--brand-white-100);
   --color-brand-white-200: var(--brand-white-200);
+  --color-brand-white-300: var(--brand-white-300);
 
   --color-brand-dark-500: var(--brand-dark-500);
   --color-brand-dark-400: var(--brand-dark-400);

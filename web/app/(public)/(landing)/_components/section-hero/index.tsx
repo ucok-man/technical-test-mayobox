@@ -4,7 +4,7 @@ import MaxWidthWrapper from "@/components/max-width-wrapper";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HeroSection() {
+export default function SectionHero() {
   return (
     <section className="relative h-screen">
       {/* Background image */}
