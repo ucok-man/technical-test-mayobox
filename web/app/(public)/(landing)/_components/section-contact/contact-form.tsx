@@ -229,11 +229,8 @@ export default function ContactForm() {
         />
       </FieldGroup>
 
-      <div className="flex items-center justify-center w-full my-9">
-        <GradientButton
-          type="submit"
-          className="h-[72px] text-[20px] py-[24px] tracking-[-2%] leading-[26px]"
-        >
+      <div className="flex items-center justify-center w-full">
+        <GradientButton type="submit" className="w-fit">
           Kirim Pesan Bantuan
         </GradientButton>
       </div>

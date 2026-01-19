@@ -42,9 +42,9 @@ function SelectTrigger({
       className={cn(
         // === Base (sama kayak Input) ===
         "flex w-full items-center justify-between gap-3",
-        "h-16 rounded-full border border-primary",
+        "h-14 md:h-16 rounded-full border border-primary",
         "px-6 py-1.5",
-        "text-lg font-jakarta-sans",
+        "text-base md:text-lg font-jakarta-sans",
         "bg-transparent",
         "shadow-xs outline-none transition-[color,box-shadow]",
         "selection:bg-primary selection:text-white",
@@ -128,7 +128,7 @@ function SelectItem({
       className={cn(
         "relative flex w-full cursor-pointer items-center gap-3",
         "rounded-xl px-4 py-3",
-        "text-lg font-jakarta-sans text-brand-dark-500",
+        "text-base md:text-lg font-jakarta-sans text-brand-dark-500",
         "outline-none select-none",
         "transition-colors",
 

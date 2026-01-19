@@ -13,7 +13,7 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
         "bg-transparent",
 
         // Typography
-        "text-lg font-jakarta-sans",
+        "text-base md:text-lg font-jakarta-sans",
         "placeholder:text-brand-dark-200 placeholder:font-jakarta-sans",
 
         // Spacing

@@ -13,8 +13,6 @@ export default function Footer() {
         <Image
           src={"/footer-background.png"}
           alt=""
-          //   width={1500}
-          //   height={500}
           sizes="100vw"
           fill
           className="object-center object-cover"
