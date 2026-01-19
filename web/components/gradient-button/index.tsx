@@ -32,7 +32,7 @@ export default function GradientButton({
   children,
   variant = "primary",
   className,
-  type = "button", // ✅ important default
+  type = "button",
   ...props
 }: Props) {
   const styles = VARIANT_STYLES[variant];

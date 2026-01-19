@@ -24,6 +24,8 @@
   --brand-blue-400: #b9d5ff;
 
   --brand-yellow-500: #fff4d2;
+
+  --brand-destructive: #fb2c36;
 }
 
 @theme inline {
@@ -35,6 +37,7 @@
   --color-secondary: var(--brand-blue-500);
   --color-secondary-foreground: var(--brand-white);
   --color-tertiary: var(--brand-yellow-500);
+  --color-destructive: var(--brand-destructive);
 
   /* Customs */
   --radius-5xl: 2.5rem;
