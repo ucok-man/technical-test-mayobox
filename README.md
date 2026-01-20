@@ -10,13 +10,10 @@ Assessment test for panya store.
   - [Linux/macOS](#linuxmacos)
   - [Windows (WSL2 - Recommended)](#windows-wsl2---recommended)
 - [Manual Setup](#manual-setup)
-- [Development](#development)
 - [Environment Variables](#environment-variables)
 - [Available Commands](#available-commands)
-- [API Documentation](#api-documentation)
-- [Troubleshooting](#troubleshooting)
 
-## 🔧 Prerequisites
+## Prerequisites
 
 ### Required Software
 
@@ -45,7 +42,7 @@ Assessment test for panya store.
 - **WSL2 is required** for the easiest setup experience
 - See [Windows Setup Guide](#windows-wsl2---recommended) below
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 mayobox/
@@ -71,15 +68,15 @@ mayobox/
 └── stop.sh            # Unix shutdown script
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Linux/macOS
 
 **1. Clone the repository**
 
 ```bash
-git clone <repository-url>
-cd mayobox
+git clone git@github.com:ucok-man/technical-test-vanya-store.git
+cd technical-test-vanya-store
 ```
 
 **2. Make scripts executable**
@@ -232,8 +229,8 @@ cd projects
 **2. Clone the repository:**
 
 ```bash
-git clone <repository-url>
-cd mayobox
+git clone git@github.com:ucok-man/technical-test-vanya-store.git
+cd technical-test-vanya-store
 ```
 
 **3. Make scripts executable:**
@@ -254,7 +251,7 @@ chmod +x start.sh stop.sh
 - 🔌 **API**: http://localhost:4000
 - 📚 **API Documentation**: http://localhost:4000/docs
 
-## 🛠️ Manual Setup
+## Manual Setup
 
 ### Prerequisites Check
 
@@ -358,7 +355,7 @@ npm run build
 npm start
 ```
 
-## 🌍 Environment Variables
+## Environment Variables
 
 ### Server (`server/.env`)
 
@@ -387,7 +384,7 @@ POSTGRES_PASSWORD=pa55word
 NEXT_PUBLIC_BASE_SERVER_URL="http://localhost:4000"
 ```
 
-## 📝 Available Commands
+## Available Commands
 
 ### Server Commands (in `server/` directory)
 
