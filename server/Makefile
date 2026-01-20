@@ -1,5 +1,5 @@
-# Include all .env* EXCEPT .env.example
-ENV_FILES := $(filter-out .env.example,$(wildcard .env*))
+# Include all .env* EXCEPT .example
+ENV_FILES := $(filter-out %.example, $(wildcard .env*))
 -include $(ENV_FILES)
 
 # ------------------------------------------------------------------ #

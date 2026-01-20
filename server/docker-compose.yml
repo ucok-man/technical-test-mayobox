@@ -1,0 +1,33 @@
+services:
+  mayobox_api:
+    build: .
+    container_name: mayobox_api
+    ports:
+      - "4000:4000"
+    environment:
+      - MAYOBOX_DB_DSN=postgres://mayobox:pa55word@mayobox_postgres:5432/mayobox?sslmode=disable
+    env_file:
+      - ".env"
+    depends_on:
+      mayobox_postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mayobox_postgres:
+    image: postgres:17
+    container_name: mayobox_postgres
+    env_file:
+      - ".env.pgcontainer"
+    ports:
+      - "5433:5432" # On host computer this is exposed on port 5433
+    volumes:
+      - mayobox_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mayobox -d mayobox"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  mayobox_postgres_data:

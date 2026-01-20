@@ -12,17 +12,17 @@ RUN make build
 # Runtime stage
 FROM alpine:latest
 
-# Create non-root user
-RUN addgroup -g 1000 tsca.api && \
-    adduser -D -u 1000 -G tsca.api tsca.api
-
 WORKDIR /app
 
-COPY --from=builder /app/bin/api .
-COPY --from=builder /app/cmd/api/docs ./cmd/api/docs
+# Create non-root user
+RUN addgroup -g 1000 mayobox.api && \
+    adduser -D -u 1000 -G mayobox.api mayobox.api
 
-RUN chown -R tsca.api:tsca.api /app
-USER tsca.api
+# Copy with ownership set directly
+COPY --from=builder --chown=mayobox.api:mayobox.api /app/bin/api .
+COPY --from=builder --chown=mayobox.api:mayobox.api /app/cmd/api/docs ./cmd/api/docs
+
+USER mayobox.api
 EXPOSE 4000
 
 CMD ["./api"]
