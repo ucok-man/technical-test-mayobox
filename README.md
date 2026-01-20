@@ -1,6 +1,6 @@
 # MayoBox Application
 
-Assesment test for panya store.
+Assessment test for panya store.
 
 ## 📋 Table of Contents
 
@@ -8,7 +8,7 @@ Assesment test for panya store.
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
   - [Linux/macOS](#linuxmacos)
-  - [Windows](#windows)
+  - [Windows (WSL2 - Recommended)](#windows-wsl2---recommended)
 - [Manual Setup](#manual-setup)
 - [Development](#development)
 - [Environment Variables](#environment-variables)
@@ -16,22 +16,34 @@ Assesment test for panya store.
 - [API Documentation](#api-documentation)
 - [Troubleshooting](#troubleshooting)
 
----
-
 ## 🔧 Prerequisites
 
-Make sure you have the following installed:
+### Required Software
 
-- **Docker Desktop** (v20.10 or higher)
-  - Download: https://www.docker.com/products/docker-desktop
-  - Includes Docker Compose
-- **Go** (v1.25.0 or higher) - for local development
-- **Node.js** (v20 or higher) - for local development
-- **Make** (optional, for Makefile commands, recommended)
-  - Linux/macOS: Usually pre-installed
-  - Windows: use WSL and install it from there,
+**Docker Desktop** (v20.10 or higher)
 
----
+- Download: https://www.docker.com/products/docker-desktop
+- Includes Docker Compose
+
+### Optional (For Local Development)
+
+- **Go** (v1.25.0 or higher)
+- **Node.js** (v20 or higher)
+- **Make** (for using Makefile commands)
+
+### Platform-Specific Requirements
+
+#### Linux/macOS
+
+- Make is usually pre-installed
+- If not available:
+  - Ubuntu/Debian: `sudo apt-get install build-essential`
+  - macOS: `xcode-select --install`
+
+#### Windows
+
+- **WSL2 is required** for the easiest setup experience
+- See [Windows Setup Guide](#windows-wsl2---recommended) below
 
 ## 📁 Project Structure
 
@@ -59,8 +71,6 @@ mayobox/
 └── stop.sh            # Unix shutdown script
 ```
 
----
-
 ## 🚀 Quick Start
 
 ### Linux/macOS
@@ -78,40 +88,30 @@ cd mayobox
 chmod +x start.sh stop.sh
 ```
 
-**3. Start the application**
+**3. Install goose (migration tool)**
+
+```bash
+go install github.com/pressly/goose/v3/cmd/goose@latest
+```
+
+**4. Start the application**
 
 ```bash
 ./start.sh
 ```
 
-The script will:
-
-- ✅ Check if `.env` files exist (creates from `.example` if missing)
-- ✅ Prompt to run database migrations
-- ✅ Start server and database containers
-- ✅ Wait for API to be ready
-- ✅ Start web application
-- ✅ Offer to view logs
-
-**4. Access the application**
+**5. Access the application**
 
 - 🌐 **Web Application**: http://localhost:3000
 - 🔌 **API**: http://localhost:4000
 - 📚 **API Documentation**: http://localhost:4000/docs
 - 🗄️ **Database**: localhost:5433
 
-**5. Stop the application**
+**6. Stop the application**
 
 ```bash
 ./stop.sh
 ```
-
-Options:
-
-1. **Stop services** - Stops containers but keeps data
-2. **Stop and remove containers** - Removes containers but keeps data
-3. **Full cleanup** - ⚠️ Deletes all data including database
-4. **Cancel**
 
 Or use arguments directly:
 
@@ -121,118 +121,212 @@ Or use arguments directly:
 ./stop.sh clean   # Full cleanup (deletes data)
 ```
 
----
+### Windows (WSL2 - Recommended)
 
-### Windows
+#### Step 1: Install WSL2
 
-#### Option 1: Using WSL2 (Recommended)
-
-**1. Install WSL2**
+**1. Open PowerShell as Administrator and run:**
 
 ```powershell
 wsl --install
 ```
 
-**2. Open WSL and follow Linux instructions above**
+**2. Restart your computer when prompted**
 
----
+**3. After restart, Ubuntu will automatically launch**
 
-#### Option 2: Using Git Bash
+- Set up your Ubuntu username and password
+- You now have a Linux environment on Windows!
 
-**1. Install Git for Windows**
+#### Step 2: Install Required Dependencies in WSL2
 
-- Download from: https://git-scm.com/download/win
+**1. Open Ubuntu (WSL2) terminal**
 
-**2. Open Git Bash and follow Linux instructions**
+**2. Update package lists:**
 
----
-
-#### Option 3: Manual Docker Commands
-
-**1. Setup environment files**
-
-Navigate to `server/` folder:
-
-```powershell
-# In server directory
-copy .env.example .env
-copy .env.pgcontainer.example .env.pgcontainer
+```bash
+sudo apt update
 ```
 
-Navigate to `web/` folder:
+**3. Install Make:**
 
-```powershell
-# In web directory
-copy .env.example .env
+```bash
+sudo apt install build-essential -y
 ```
 
-**2. Start the database**
+**4. Install Go (v1.25.0)**
 
-```powershell
-cd server
-docker compose up -d mayobox_postgres
+```bash
+# Download Go
+wget https://go.dev/dl/go1.25.0.linux-amd64.tar.gz
+
+# Remove any previous Go installation and extract new one
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.25.0.linux-amd64.tar.gz
+
+# Add Go to PATH (add to ~/.bashrc or ~/.zshrc)
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.bashrc
+source ~/.bashrc
+
+# Verify installation
+go version
 ```
 
-**3. Wait for database to be ready**
+**5. Install goose (migration tool):**
 
-```powershell
-# Wait about 10 seconds, or check logs
-docker compose logs mayobox_postgres
-```
-
-**4. Run migrations**
-
-Install Go if not installed, then:
-
-```powershell
-# Install goose (migration tool)
+```bash
 go install github.com/pressly/goose/v3/cmd/goose@latest
-
-# Run migrations
-$env:GOOSE_DRIVER="postgres"
-$env:GOOSE_DBSTRING="postgres://mayobox:pa55word@localhost:5433/mayobox?sslmode=disable"
-goose -dir ./migrations up
 ```
 
-**5. Start all services**
+**6. Install Node.js (v20):**
 
-```powershell
-# In server directory
-docker compose up -d
+```bash
+# Install Node Version Manager (nvm)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 
-# In web directory
-cd ..\web
-docker compose up -d
+# Reload shell configuration
+source ~/.bashrc
+
+# Install Node.js v20
+nvm install 20
+nvm use 20
+
+# Verify installation
+node --version
+npm --version
 ```
 
-**6. Stop services**
+#### Step 3: Install and Configure Docker Desktop
 
-```powershell
-# Stop server
-cd server
-docker compose down
+**1. Download Docker Desktop for Windows:**
 
-# Stop web
-cd ..\web
-docker compose down
+- https://www.docker.com/products/docker-desktop
+
+**2. Install Docker Desktop**
+
+**3. Enable WSL2 Integration:**
+
+- Open Docker Desktop
+- Go to Settings → Resources → WSL Integration
+- Enable integration with your Ubuntu distribution
+- Click "Apply & Restart"
+
+**4. Verify Docker in WSL2:**
+
+```bash
+docker --version
+docker compose version
 ```
 
----
+#### Step 4: Clone and Run the Project
+
+**1. Navigate to your project directory in WSL2:**
+
+```bash
+# It's recommended to keep projects in WSL2 filesystem for better performance
+cd ~
+mkdir projects
+cd projects
+```
+
+**2. Clone the repository:**
+
+```bash
+git clone <repository-url>
+cd mayobox
+```
+
+**3. Make scripts executable:**
+
+```bash
+chmod +x start.sh stop.sh
+```
+
+**4. Start the application:**
+
+```bash
+./start.sh
+```
+
+**5. Access from Windows:**
+
+- 🌐 **Web Application**: http://localhost:3000
+- 🔌 **API**: http://localhost:4000
+- 📚 **API Documentation**: http://localhost:4000/docs
 
 ## 🛠️ Manual Setup
 
+### Prerequisites Check
+
+Before starting manual setup, verify you have the required tools:
+
+```bash
+# Check Docker
+docker --version
+docker compose version
+
+# Check Go (if doing local development)
+go version
+
+# Check Node.js (if doing local development)
+node --version
+
+# Check Make
+make --version
+
+# Check goose (required for migrations)
+goose --version
+```
+
+**If goose is not installed:**
+
+```bash
+go install github.com/pressly/goose/v3/cmd/goose@latest
+
+# Verify installation
+goose --version
+```
+
+**If Air is not installed (optional, for hot reload):**
+
+```bash
+go install github.com/air-verse/air@latest
+
+# Verify installation
+air -v
+```
+
+### Setup Steps
+
 If you want to set up each component manually:
 
-### 1. Database Only
+#### 1. Environment Files
+
+**Server:**
+
+```bash
+cd server
+cp .env.example .env
+cp .env.pgcontainer.example .env.pgcontainer
+```
+
+**Web:**
+
+```bash
+cd web
+cp .env.example .env
+```
+
+#### 2. Database Only
 
 ```bash
 cd server
 make db/up        # Start PostgreSQL
 make db/wait      # Wait until ready
-make migrate/up   # Run migrations
+make migrate/up   # Run migrations (requires goose)
 ```
 
-### 2. API Server (Local Development)
+#### 3. API Server (Local Development)
 
 ```bash
 cd server
@@ -248,7 +342,7 @@ make build
 make start
 ```
 
-### 3. Web Application (Local Development)
+#### 4. Web Application (Local Development)
 
 ```bash
 cd web
@@ -263,8 +357,6 @@ npm run dev
 npm run build
 npm start
 ```
-
----
 
 ## 🌍 Environment Variables
 
@@ -295,263 +387,59 @@ POSTGRES_PASSWORD=pa55word
 NEXT_PUBLIC_BASE_SERVER_URL="http://localhost:4000"
 ```
 
----
-
 ## 📝 Available Commands
 
 ### Server Commands (in `server/` directory)
 
-| Command                | Description                    |
-| ---------------------- | ------------------------------ |
-| `make help`            | Show all available commands    |
-| `make dev`             | Run API with hot reload        |
-| `make build`           | Build the API binary           |
-| `make start`           | Start the built API            |
-| `make test`            | Run tests with coverage        |
-| `make db/up`           | Start database container       |
-| `make db/down`         | Stop database container        |
-| `make db/clear`        | Remove database and volumes    |
-| `make db/wait`         | Wait until database is ready   |
-| `make migrate/new`     | Create new migration           |
-| `make migrate/up`      | Apply all migrations           |
-| `make migrate/reset`   | Rollback all migrations        |
-| `make migrate/version` | Show current migration version |
-| `make migrate/status`  | Show migration status          |
-| `make compose/up`      | Run API + DB with Docker       |
-| `make compose/clear`   | Clean up containers            |
-| `make swag`            | Generate Swagger docs          |
-| `make tidy`            | Tidy and vendor dependencies   |
-| `make audit`           | Run quality control checks     |
+| Command                | Description                    | Requirements         |
+| ---------------------- | ------------------------------ | -------------------- |
+| `make help`            | Show all available commands    | Make                 |
+| `make dev`             | Run API with hot reload        | Make, Air            |
+| `make build`           | Build the API binary           | Make, Go             |
+| `make start`           | Start the built API            | Make                 |
+| `make test`            | Run tests with coverage        | Make, Go             |
+| `make db/up`           | Start database container       | Make, Docker         |
+| `make db/down`         | Stop database container        | Make, Docker         |
+| `make db/clear`        | Remove database and volumes    | Make, Docker         |
+| `make db/wait`         | Wait until database is ready   | Make, Docker         |
+| `make migrate/new`     | Create new migration           | Make, goose          |
+| `make migrate/up`      | Apply all migrations           | Make, goose          |
+| `make migrate/reset`   | Rollback all migrations        | Make, goose          |
+| `make migrate/version` | Show current migration version | Make, goose          |
+| `make migrate/status`  | Show migration status          | Make, goose          |
+| `make compose/up`      | Run API + DB with Docker       | Make, Docker         |
+| `make compose/clear`   | Clean up containers            | Make, Docker         |
+| `make swag`            | Generate Swagger docs          | Make, swag (install) |
+| `make tidy`            | Tidy and vendor dependencies   | Make, Go             |
+| `make audit`           | Run quality control checks     | Make, Go             |
 
 ### Web Commands (in `web/` directory)
 
-| Command              | Description              |
-| -------------------- | ------------------------ |
-| `npm run dev`        | Start development server |
-| `npm run build`      | Build for production     |
-| `npm start`          | Start production server  |
-| `npm run lint`       | Run ESLint               |
-| `make compose/up`    | Run web with Docker      |
-| `make compose/clear` | Clean up containers      |
+| Command              | Description              | Requirements |
+| -------------------- | ------------------------ | ------------ |
+| `npm run dev`        | Start development server | Node.js, npm |
+| `npm run build`      | Build for production     | Node.js, npm |
+| `npm start`          | Start production server  | Node.js, npm |
+| `npm run lint`       | Run ESLint               | Node.js, npm |
+| `make compose/up`    | Run web with Docker      | Make, Docker |
+| `make compose/clear` | Clean up containers      | Make, Docker |
 
----
+### Installing Missing Tools
 
-## 📚 API Documentation
-
-Once the server is running, access the interactive API documentation:
-
-- **Swagger UI**: http://localhost:4000/docs
-- **OpenAPI Spec**: http://localhost:4000/swagger.yaml
-
-### Available Endpoints
-
-- `GET /` - Health check
-- `GET /v1/testimonies` - Get all testimonials
-- `GET /v1/faqs` - Get all FAQs
-
----
-
-## 🐛 Troubleshooting
-
-### Port Already in Use
-
-**Error**: "Port 3000/4000/5433 is already allocated"
-
-**Solution**:
+**Air (for hot reload):**
 
 ```bash
-# Find and kill the process using the port
-# On Linux/macOS
-lsof -ti:3000 | xargs kill -9
-lsof -ti:4000 | xargs kill -9
-lsof -ti:5433 | xargs kill -9
-
-# On Windows (PowerShell)
-Get-Process -Id (Get-NetTCPConnection -LocalPort 3000).OwningProcess | Stop-Process
-```
-
-Or change the port in `docker-compose.yml` or `.env` files.
-
----
-
-### Database Connection Failed
-
-**Error**: "failed connecting to database"
-
-**Solution**:
-
-1. Ensure database is running: `docker ps`
-2. Check database logs: `cd server && docker compose logs mayobox_postgres`
-3. Wait for database to be ready: `make db/wait`
-4. Verify DSN in `.env` matches `.env.pgcontainer`
-
----
-
-### Migration Failed
-
-**Error**: "goose: no migrations to run"
-
-**Solution**:
-
-```bash
-cd server
-
-# Check migration status
-make migrate/status
-
-# Reset and retry
-make migrate/reset
-make migrate/up
-```
-
----
-
-### Docker Issues on Windows
-
-**Error**: "docker: command not found" or connection errors
-
-**Solution**:
-
-1. Ensure Docker Desktop is running
-2. Enable WSL2 integration in Docker Desktop settings
-3. Restart Docker Desktop
-4. Try using WSL2 terminal instead of PowerShell/CMD
-
----
-
-### Hot Reload Not Working (Development)
-
-**Server not reloading**:
-
-```bash
-# Install Air for Go hot reload
 go install github.com/air-verse/air@latest
-
-# Run with Air
-cd server
-make dev
 ```
 
-**Web not reloading**:
+**Swag (for Swagger docs):**
 
 ```bash
-# Clear Next.js cache
-cd web
-rm -rf .next
-npm run dev
+go install github.com/swaggo/swag/cmd/swag@latest
 ```
 
----
-
-### Cannot Access Web Application
-
-**Error**: "This site can't be reached"
-
-**Solutions**:
-
-1. Check if container is running: `docker ps`
-2. Check container logs: `cd web && docker compose logs`
-3. Verify `NEXT_PUBLIC_BASE_SERVER_URL` in `web/.env`
-4. Clear browser cache and cookies
-5. Try accessing from different browser or incognito mode
-
----
-
-## 🔄 Development Workflow
-
-### Making Database Changes
-
-1. Create a new migration:
+**Goose (for migrations - REQUIRED):**
 
 ```bash
-cd server
-make migrate/new
-# Enter migration name when prompted
+go install github.com/pressly/goose/v3/cmd/goose@latest
 ```
-
-2. Edit the generated SQL files in `server/migrations/`
-
-3. Apply the migration:
-
-```bash
-make migrate/up
-```
-
-4. Check status:
-
-```bash
-make migrate/status
-```
-
----
-
-### Running Tests
-
-```bash
-cd server
-
-# Run all tests
-make test
-
-# Run tests with gotestdox (better output)
-make test/doc
-
-# Run with coverage and race detection
-make audit
-```
-
----
-
-### Viewing Logs
-
-**All services**:
-
-```bash
-# Server
-cd server && docker compose logs -f
-
-# Web
-cd web && docker compose logs -f
-```
-
-**Specific container**:
-
-```bash
-docker logs -f mayobox_api
-docker logs -f mayobox_postgres
-docker logs -f mayobox_web
-```
-
----
-
-## 📦 Building for Production
-
-### Server
-
-```bash
-cd server
-make build
-# Binary will be in ./bin/api
-```
-
-### Web
-
-```bash
-cd web
-npm run build
-npm start
-```
-
-### Docker Images
-
-```bash
-# Build server image
-cd server
-docker build -t mayobox-api .
-
-# Build web image
-cd web
-docker build -t mayobox-web --build-arg NEXT_PUBLIC_BASE_SERVER_URL=http://your-api-url .
-```
-
-**Happy coding! 🎉**
