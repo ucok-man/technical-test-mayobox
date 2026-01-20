@@ -10,21 +10,22 @@ var (
 	ErrEditConflict   = errors.New("edit conflict")
 )
 
-type TransactionModeler interface {
-	Insert(transaction *Transaction) error
-	GetAll(param TransactionGetAllParam) ([]*Transaction, *Metadata, error)
-	GetById(id int) (*Transaction, error)
-	Update(transaction *Transaction) error
-	DeleteOne(id int) error
-	Summary(param TransactionSummaryParam) (*TransactionSummary, *Metadata, error)
+type TestimoniModeler interface {
+	GetAll(param TestimoniGetAllParam) ([]*TestimoniWithUser, *Metadata, error)
+}
+
+type FAQModeler interface {
+	GetAll() ([]*FAQWithAnswers, *Metadata, error)
 }
 
 type Models struct {
-	Transactions TransactionModeler
+	Testimoni TestimoniModeler
+	FAQ       FAQModeler
 }
 
 func NewModels(db *sql.DB) Models {
 	return Models{
-		Transactions: TransactionModel{db: db},
+		Testimoni: TestimoniModel{db: db},
+		FAQ:       FAQModel{db: db},
 	}
 }

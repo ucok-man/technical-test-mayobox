@@ -1,5 +1,6 @@
-# Include .env if exists
--include .env*
+# Include all .env* EXCEPT .env.example
+ENV_FILES := $(filter-out .env.example,$(wildcard .env*))
+-include $(ENV_FILES)
 
 # ------------------------------------------------------------------ #
 #                               HELPERS                              #
@@ -156,8 +157,8 @@ migrate/up:
 	@GOOSE_DRIVER=postgres GOOSE_DBSTRING=${MAYOBOX_DB_DSN} goose --dir ./migrations up
 
 ## migrate/reset: roll back all migration
-.PHONY: migrate/down
-migrate/down:
+.PHONY: migrate/reset
+migrate/reset:
 	@read -p "Are you sure you want to reset the DB? [y/N] " ans; \
 	if echo "$$ans" | grep -iq '^y$$'; then \
 		GOOSE_DRIVER=postgres GOOSE_DBSTRING=${MAYOBOX_DB_DSN} goose --dir ./migrations reset; \

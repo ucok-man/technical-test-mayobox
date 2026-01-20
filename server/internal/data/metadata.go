@@ -21,3 +21,8 @@ func calculateMetadata(totalRecords, page, pageSize int) Metadata {
 		TotalRecords: totalRecords,
 	}
 }
+
+func calculatePageOffset(page, pageSize int) int {
+	offset := (page - 1) * pageSize
+	return offset
+}

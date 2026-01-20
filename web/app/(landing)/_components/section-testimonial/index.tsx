@@ -16,7 +16,7 @@ const TESTIMONI_ITEMS = Array.from({ length: 5 }, () => ({
   userCity: "Pekanbaru",
   testimoni:
     "Harga yang kompetitif, Testimoni dan bukti Transaksi, pilihan metode pembayaran bermacam dan memudahkan pembeli, proses transaksi yang mudah",
-  icon: "/mayo-testimoni-icon.png",
+  icon: "/mayo-testimoni-icon-1.png",
 }));
 
 export default function SectionTestimonial() {

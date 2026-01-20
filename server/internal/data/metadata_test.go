@@ -61,3 +61,44 @@ func TestCalculateMetadata(t *testing.T) {
 		assert.Equal(t, 50, result.PageSize)
 	})
 }
+
+func TestCalculatePageOffset(t *testing.T) {
+	tests := []struct {
+		name     string
+		page     int
+		pageSize int
+		expected int
+	}{
+		{
+			name:     "first page with page size 10",
+			page:     1,
+			pageSize: 10,
+			expected: 0,
+		},
+		{
+			name:     "second page with page size 10",
+			page:     2,
+			pageSize: 10,
+			expected: 10,
+		},
+		{
+			name:     "third page with page size 20",
+			page:     3,
+			pageSize: 20,
+			expected: 40,
+		},
+		{
+			name:     "page 5 with page size 25",
+			page:     5,
+			pageSize: 25,
+			expected: 100,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := calculatePageOffset(tt.page, tt.pageSize)
+			assert.Equal(t, tt.expected, result)
+		})
+	}
+}

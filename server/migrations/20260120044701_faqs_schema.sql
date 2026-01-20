@@ -20,9 +20,6 @@ CREATE TABLE faq_answers (
 
   created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
-
-CREATE INDEX idx_faqs_display_order ON faqs(display_order);
-CREATE INDEX idx_faq_answers_faq_id ON faq_answers(faq_id);
 -- +goose StatementEnd
 
 -- +goose Down

@@ -20,27 +20,22 @@ func (app *application) routes() http.Handler {
 	ec.Use(app.withRequestLogger())
 
 	// Documentation routes
-
 	ec.FileFS("/swagger.yaml", "docs/swagger.yaml", swaggerFile)
 	ec.GET("/docs", app.serveSwaggerUI)
 
 	// Health check
-	ec.GET("/healthcheck", app.healthcheckHandler)
+	ec.GET("/", app.healthcheckHandler)
 
-	// Transaction routes
-	transactions := ec.Group("/transactions")
+	// Main Routes
+	v1 := ec.Group("/v1")
+
+	testimonies := v1.Group("/testimonies")
 	{
-		transactions.GET("", app.getAllTransactionHandler)
-		transactions.POST("", app.createTransactionHandler)
-		transactions.GET("/:id", app.getByIdTransactionHandler)
-		transactions.PUT("/:id", app.updateByIdTransactionHandler)
-		transactions.DELETE("/:id", app.removeByIdTransactionHandler)
+		testimonies.GET("", app.getAllTestimoniHandler)
 	}
-
-	// Dashboard routes
-	dashboard := ec.Group("/dashboard")
+	faqs := v1.Group("/faqs")
 	{
-		dashboard.GET("/summary", app.summaryTransactionHandler)
+		faqs.GET("", app.getAllFAQHandler)
 	}
 
 	return ec
