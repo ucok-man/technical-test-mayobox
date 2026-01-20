@@ -28,7 +28,7 @@ type TestimoniGetAllParam struct {
 
 type TestimoniWithUser struct {
 	Testimoni
-	User User
+	User User `json:"user"`
 }
 
 func (m TestimoniModel) GetAll(param TestimoniGetAllParam) ([]*TestimoniWithUser, *Metadata, error) {

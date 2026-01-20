@@ -5,7 +5,6 @@ import GradientButton from "@/components/gradient-button";
 import GradientText from "@/components/gradient-text";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import Image from "next/image";
-import { useMediaQuery } from "usehooks-ts";
 import BestSellerCard from "./best-seller-card";
 
 const PRODUCT_BEST_SELLER_ITEMS = Array.from({ length: 5 }, () => ({
@@ -16,15 +15,7 @@ const PRODUCT_BEST_SELLER_ITEMS = Array.from({ length: 5 }, () => ({
   sold: 100,
 }));
 
-const MOBILE_COUNT = 4;
-
 export default function SectionProductBestSeller() {
-  const isXL = useMediaQuery("(min-width: 1280px)");
-
-  const products = isXL
-    ? PRODUCT_BEST_SELLER_ITEMS
-    : PRODUCT_BEST_SELLER_ITEMS.slice(0, MOBILE_COUNT);
-
   return (
     <section className="space-y-12">
       <MaxWidthWrapper className="flex items-center justify-between">
@@ -57,22 +48,23 @@ export default function SectionProductBestSeller() {
       </MaxWidthWrapper>
 
       <MaxWidthWrapper className="grid grid-cols-2 xl:grid-cols-5 gap-4">
-        {products.map((item, idx) => (
+        {PRODUCT_BEST_SELLER_ITEMS.map((item, idx) => (
           <div
             key={idx}
-            className="max-xl:justify-self-end max-xl:even:justify-self-start justify-self-center w-full max-w-[256px]"
+            className={`max-xl:justify-self-end max-xl:even:justify-self-start justify-self-center w-full max-w-[256px] ${
+              idx >= 4 ? "hidden xl:block" : ""
+            }`}
           >
             <BestSellerCard {...item} />
           </div>
         ))}
       </MaxWidthWrapper>
-      {!isXL && (
-        <div className="flex w-full items-center justify-center">
-          <GradientButton className="w-fit text-base md:text-lg xl:text-xl">
-            Selengkapnya
-          </GradientButton>
-        </div>
-      )}
+
+      <div className="flex w-full items-center justify-center xl:hidden">
+        <GradientButton className="w-fit text-base md:text-lg xl:text-xl">
+          Selengkapnya
+        </GradientButton>
+      </div>
     </section>
   );
 }

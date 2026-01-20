@@ -1,3 +1,4 @@
+import Providers from "@/components/providers";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -30,9 +31,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className="">
       <body
-        className={`antialiased ${chillax.variable} ${jakartaSans.variable} ${cherryBombOne.variable} font-jakarta-sans max-w-[1920px] mx-auto`}
+        className={`antialiased ${chillax.variable} ${jakartaSans.variable} ${cherryBombOne.variable} font-jakarta-sans max-w-480 mx-auto`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

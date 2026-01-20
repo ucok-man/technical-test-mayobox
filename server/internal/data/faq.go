@@ -30,7 +30,7 @@ type FAQModel struct {
 /* ---------------------------- METHOD ---------------------------- */
 type FAQWithAnswers struct {
 	FAQ
-	Answers []*FAQAnswer
+	Answers []*FAQAnswer `json:"answers"`
 }
 
 func (m FAQModel) GetAll() ([]*FAQWithAnswers, *Metadata, error) {

@@ -1,27 +1,23 @@
 "use client";
 
-import AutoSwiper from "@/components/auto-swipper";
 import Badge from "@/components/badge";
 import GradientButton from "@/components/gradient-button";
 import GradientText from "@/components/gradient-text";
 import Icons from "@/components/icons";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import Image from "next/image";
-import { useMediaQuery } from "usehooks-ts";
-import TestimoniCard from "./testimoni-card";
+import TestimoniContent from "./testimoni-content";
 
-const TESTIMONI_ITEMS = Array.from({ length: 5 }, () => ({
-  userAvatar: "/black-hair-boy.png",
-  userName: "Windah",
-  userCity: "Pekanbaru",
-  testimoni:
-    "Harga yang kompetitif, Testimoni dan bukti Transaksi, pilihan metode pembayaran bermacam dan memudahkan pembeli, proses transaksi yang mudah",
-  icon: "/mayo-testimoni-icon-1.png",
-}));
+// const TESTIMONI_ITEMS = Array.from({ length: 5 }, () => ({
+//   userAvatar: "/black-hair-boy.png",
+//   userName: "Windah",
+//   userCity: "Pekanbaru",
+//   testimoni:
+//     "Harga yang kompetitif, Testimoni dan bukti Transaksi, pilihan metode pembayaran bermacam dan memudahkan pembeli, proses transaksi yang mudah",
+//   icon: "/mayo-testimoni-icon-1.png",
+// }));
 
 export default function SectionTestimonial() {
-  const isMD = useMediaQuery("(max-width: 768px)");
-
   return (
     <section className="space-y-34 relative overflow-hidden">
       <div className="absolute inset-0 hidden xl:flex xl:items-center xl:justify-between">
@@ -69,12 +65,7 @@ export default function SectionTestimonial() {
         </GradientButton>
       </MaxWidthWrapper>
 
-      <AutoSwiper
-        items={TESTIMONI_ITEMS}
-        spaceBetween={isMD ? 0 : 32}
-        className="overflow-visible!"
-        renderItem={(item) => <TestimoniCard {...item} />}
-      />
+      <TestimoniContent />
     </section>
   );
 }
